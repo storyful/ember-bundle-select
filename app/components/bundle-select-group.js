@@ -1,0 +1,1 @@
+export { default } from 'ember-cli-bundle-select/components/bundle-select-group';
