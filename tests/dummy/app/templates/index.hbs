@@ -1,0 +1,15 @@
+{{#bundle-select-group as |group|}}
+  <p>{{group.length}} avengers selected.</p>
+
+  <ul>
+  {{#each models as |model|}}
+    <li>
+      {{#bundle-select-option tagName="label" option=model group=group as |selected|}}
+        {{input type="checkbox" checked=(mut selected)}}
+        {{model.name}},
+        level {{model.level}}
+      {{/bundle-select-option}}
+    </li>
+  {{/each}}
+  </ul>
+{{/bundle-select-group}}
