@@ -1,18 +1,22 @@
 import Ember from 'ember';
 import layout from '../templates/components/bundle-select-option';
 
-const { get, observer } = Ember;
+const { get, computed } = Ember;
 
 export default Ember.Component.extend({
 
   layout,
 
-  didSelectedChanged: observer('selected', function(){
-    const selected  = get(this, 'selected');
-    const group     = get(this, 'group');
-    const option    = get(this, 'option');
+  isSelected: computed('group.[]', function(){
+    return this.get('group').indexOf(this.get('option')) > -1;
+  }),
 
-    selected ? this.get('group').pushObject(option) : group.removeObject(option);
-  })
+  actions: {
+    toggle(){
+      return this.get('isSelected') ?
+             this.get('group').removeObject( get(this, 'option') ) :
+             this.get('group').pushObject( get(this, 'option') );
+    }
+  }
 
 });
