@@ -8,18 +8,24 @@
   </p>
 
   <table class="table">
-  {{#each models as |model|}}
-    {{#bundle-select-option tagName="tr" option=model bundle=bundle as |bundleOption|}}
-      <td>
-        <input type="checkbox"
-          checked={{bundleOption.selected}}
-          onclick={{action bundleOption.toggleAction}} />
-      </td>
+    {{#each models as |model|}}
+      {{#bundle-select-option
+          tagName="tr"
+          classNames="is-selectable"
+          toggleOnClick=true
+          option=model
+          bundle=bundle as |bundleOption|}}
 
-      <td>{{model.name}}</td>
-      <td>{{model.level}}</td>
-    {{/bundle-select-option}}
-  {{/each}}
+        <td>
+          <input type="checkbox"
+            checked={{bundleOption.selected}}
+            onclick={{action bundleOption.toggleAction bubbles=false}} />
+        </td>
+
+          <td>{{model.name}}</td>
+        <td>{{model.level}}</td>
+      {{/bundle-select-option}}
+    {{/each}}
   </table>
 
 {{/bundle-select-group}}

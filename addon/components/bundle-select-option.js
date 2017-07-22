@@ -1,18 +1,22 @@
 import Ember from 'ember';
 import layout from '../templates/components/bundle-select-option';
 
-const { computed } = Ember;
+const { computed, get, assert, isPresent } = Ember;
 
 export default Ember.Component.extend({
 
   layout,
 
-  isSelected: computed('bundle.selected.[]', function(){
-    return this.get('bundle.selected').indexOf(this.get('option')) > -1;
-  }),
+  didReceiveAttrs(){
+    assert(
+      '{{bundle-select-option}} requires a valid bundle object',
+      isPresent( get(this, 'bundle') ));
+
+    this._super(...arguments);
+  },
 
   didInsertElement(){
-    this.get('bundle.options').pushObject( this.get('option') );
+    get(this, 'bundle.options').pushObject( get(this, 'option') );
   },
 
   willDestroyElement(){
@@ -23,6 +27,16 @@ export default Ember.Component.extend({
     toggle(){
       return this.get('bundle.toggleAction')( this.get('option') );
     }
-  }
+  },
+
+  click(e){
+    e.stopPropagation();
+    return get(this, 'toggleOnClick') ? this.send('toggle') : null;
+  },
+
+  isSelected: computed('bundle.selected.[]', function(){
+    return get(this, 'bundle.selected').indexOf( get(this, 'option')) > -1;
+  }),
+
 
 });
