@@ -6,7 +6,6 @@ This README outlines the details of collaborating on this Ember addon.
 
 ```
 ember install https://github.com/storyful/ember-bundle-select.git
-
 ```
 
 ## Usage
@@ -15,16 +14,19 @@ ember install https://github.com/storyful/ember-bundle-select.git
 
 ```hbs
 {{#bundle-select-group as |bundle|}}
-  <ul>
-  {{#each models as |model|}}
-    <li>
-      {{#bundle-select-option option=model tagName="label" bundle=bundle as |selected toggleAction|}}
-        <input type="checkbox" checked={{selected}} onclick={{action toggleAction}} />
-        <span>{{model.name}}</span>,
+  <table class="table">
+    {{#each models as |model|}}
+      {{#bundle-select-option tagName="tr" option=model bundle=bundle as |bundleOption|}}
+        <td>
+          <input type="checkbox"
+            checked={{bundleOption.selected}}
+            onclick={{action bundleOption.toggleAction}} />
+        </td>
+
+        <td>{{model.name}}</td>
       {{/bundle-select-option}}
-    </li>
-  {{/each}}
-  </ul>
+    {{/each}}
+  </table>
 {{/bundle-select-group}}
 ```
 
