@@ -3,20 +3,23 @@
 
   <p>
     <button {{action bundle.selectAllAction}}>All</button>
-    <button {{action bundle.clearAction}}>None</button>
+    <button {{action bundle.selectNoneAction}}>None</button>
+    <button {{action "levelUp" bundle.selected}} disabled={{bundle.isEmpty}}> Level Up! </button>
   </p>
 
-  <ul>
+  <table class="table">
   {{#each models as |model|}}
-    <li>
-      {{#bundle-select-option option=model tagName="label" bundle=bundle as |selected toggle|}}
-        <input type="checkbox" checked={{selected}} onclick={{action toggle}} />
-        <span>{{model.name}}</span>,
-        <span>level {{model.level}}</span>
-      {{/bundle-select-option}}
-    </li>
-  {{/each}}
-  </ul>
+    {{#bundle-select-option tagName="tr" option=model bundle=bundle as |bundleOption|}}
+      <td>
+        <input type="checkbox"
+          checked={{bundleOption.selected}}
+          onclick={{action bundleOption.toggleAction}} />
+      </td>
 
-  <p><button {{action "levelUp" bundle.selected}} disabled={{bundle.isEmpty}}> Level Up! </button></p>
+      <td>{{model.name}}</td>
+      <td>{{model.level}}</td>
+    {{/bundle-select-option}}
+  {{/each}}
+  </table>
+
 {{/bundle-select-group}}

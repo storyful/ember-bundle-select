@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 
   actions: {
     toggle(){
-      this.get('bundle.toggleAction')( this.get('option') );
+      return this.get('bundle.toggleAction')( this.get('option') );
     }
   }
 

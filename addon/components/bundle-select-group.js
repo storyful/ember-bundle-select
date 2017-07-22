@@ -18,7 +18,7 @@ export default Ember.Component.extend({
       this.set('selected', A(this.get('options').copy()) );
     },
 
-    clear(){
+    selectNone(){
       this.get('selected').clear();
     },
 

@@ -1,1 +1,6 @@
-{{yield isSelected (action "toggle")}}
+{{yield
+  (hash
+    selected=isSelected
+    toggleAction=(action "toggle")
+  )
+}}
