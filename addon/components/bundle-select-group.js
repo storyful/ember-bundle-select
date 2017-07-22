@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/bundle-select-group';
 
-const { A } = Ember;
+const { A, computed } = Ember;
 
 export default Ember.Component.extend({
 
@@ -27,6 +27,8 @@ export default Ember.Component.extend({
              this.get('selected').removeObject( option ) :
              this.get('selected').pushObject( option );
     }
-  }
+  },
+
+  isEmpty: computed.empty('selected')
 
 });

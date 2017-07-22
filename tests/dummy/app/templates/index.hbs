@@ -18,5 +18,5 @@
   {{/each}}
   </ul>
 
-  <p><button {{action "levelUp" bundle.selected}}> Level Up! </button></p>
+  <p><button {{action "levelUp" bundle.selected}} disabled={{bundle.isEmpty}}> Level Up! </button></p>
 {{/bundle-select-group}}
