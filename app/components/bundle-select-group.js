@@ -1,1 +1,1 @@
-export { default } from 'ember-cli-bundle-select/components/bundle-select-group';
+export { default } from 'ember-bundle-select/components/bundle-select-group';

@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-cli-bundle-select'
+  name: 'ember-bundle-select'
 };

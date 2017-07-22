@@ -1,11 +1,11 @@
-# ember-cli-bundle-select
+# ember-bundle-select
 
 This README outlines the details of collaborating on this Ember addon.
 
 ## Install
 
 ```
-ember install https://github.com/storyful/ember-cli-bundle-select.git
+ember install https://github.com/storyful/ember-bundle-select.git
 
 ```
 
@@ -31,7 +31,7 @@ ember install https://github.com/storyful/ember-cli-bundle-select.git
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd ember-cli-bundle-select`
+* `cd ember-bundle-select`
 * `npm install`
 * `bower install`
 
