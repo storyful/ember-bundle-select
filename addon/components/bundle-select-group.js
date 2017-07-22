@@ -9,12 +9,23 @@ export default Ember.Component.extend({
 
   init(){
     this._super(...arguments);
-    this.set('group', A());
+    this.set('options', A());
+    this.set('selected', A());
   },
 
   actions: {
+    selectAll(){
+      this.set('selected', A(this.get('options').copy()) );
+    },
+
     clear(){
-      this.get('group').clear();
+      this.get('selected').clear();
+    },
+
+    toggle(option){
+      return this.get('selected').indexOf( option ) > -1 ?
+             this.get('selected').removeObject( option ) :
+             this.get('selected').pushObject( option );
     }
   }
 

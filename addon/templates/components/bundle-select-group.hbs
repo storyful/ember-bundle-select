@@ -1,1 +1,7 @@
-{{yield group (action "clear")}}
+{{yield (hash
+  selected=selected
+  options=options
+  toggleAction=(action "toggle")
+  selectAllAction=(action "selectAll")
+  clearAction=(action "clear")
+)}}
