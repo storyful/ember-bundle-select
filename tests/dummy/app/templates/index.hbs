@@ -7,12 +7,17 @@
     <button {{action "levelUp" bundle.selected}} disabled={{bundle.isEmpty}}> Level Up! </button>
   </p>
 
+  <form>
+    {{input value=(mut newModel.name)}}
+    {{input value=(mut newModel.level)}}
+    <button {{action "createAvenger"}}>Create Avenger</button>
+  </form>
+
   <table class="table">
     {{#each models as |model|}}
       {{#bundle-select-option
           tagName="tr"
           classNames="is-selectable"
-          toggleOnClick=true
           option=model
           bundle=bundle as |bundleOption|}}
 
@@ -27,5 +32,29 @@
       {{/bundle-select-option}}
     {{/each}}
   </table>
+
+  <button {{action "toggleVillans"}}>Toggle Villans</button>
+
+  {{#if showVillans}}
+    <table class="table">
+      {{#each otherModels as |model|}}
+        {{#bundle-select-option
+            tagName="tr"
+            classNames="is-selectable"
+            option=model
+            bundle=bundle as |bundleOption|}}
+
+          <td>
+            <input type="checkbox"
+              checked={{bundleOption.selected}}
+              onclick={{action bundleOption.toggleAction bubbles=false}} />
+          </td>
+
+            <td>{{model.name}}</td>
+          <td>{{model.level}}</td>
+        {{/bundle-select-option}}
+      {{/each}}
+    </table>
+  {{/if}}
 
 {{/bundle-select-group}}

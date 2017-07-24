@@ -16,11 +16,11 @@ export default Ember.Component.extend({
   },
 
   didInsertElement(){
-    get(this, 'bundle.options').pushObject( get(this, 'option') );
+    get(this, 'bundle.registerOptionAction')( get(this, 'option') )
   },
 
   willDestroyElement(){
-    this.get('bundle.options').removeObject( this.get('option') );
+    get(this, 'bundle.unregisterOptionAction')( get(this, 'option') )
   },
 
   actions: {

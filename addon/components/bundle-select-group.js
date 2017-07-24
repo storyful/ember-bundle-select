@@ -1,7 +1,12 @@
 import Ember from 'ember';
 import layout from '../templates/components/bundle-select-group';
 
-const { A, computed } = Ember;
+const {
+  computed,
+  get,
+  A,
+  run
+} = Ember;
 
 export default Ember.Component.extend({
 
@@ -14,6 +19,23 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    registerOption(option){
+      get(this, 'options').pushObject( option );
+    },
+
+    unregisterOption(option){
+      this.isSelected(option) ? run.next(() => this.send('deselectOption', option)) : null;
+      get(this, 'options').removeObject( option );
+    },
+
+    selectOption(option){
+      get(this, 'selected').pushObject( option );
+    },
+
+    deselectOption(option){
+      get(this, 'selected').removeObject( option );
+    },
+
     selectAll(){
       this.set('selected', A(this.get('options').copy()) );
     },
@@ -23,12 +45,16 @@ export default Ember.Component.extend({
     },
 
     toggle(option){
-      return this.get('selected').indexOf( option ) > -1 ?
-             this.get('selected').removeObject( option ) :
-             this.get('selected').pushObject( option );
+      return this.isSelected(option)  ?
+             this.send('deselectOption', option) :
+             this.send('selectOption', option);
     }
   },
 
-  isEmpty: computed.empty('selected')
+  isEmpty: computed.empty('selected'),
+
+  isSelected(option){
+    return this.get('selected').indexOf( option ) > -1;
+  }
 
 });
