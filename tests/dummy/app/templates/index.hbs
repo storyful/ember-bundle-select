@@ -1,60 +1,78 @@
 {{#bundle-select-group as |bundle|}}
-  <p>{{bundle.selected.length}} avengers selected.</p>
+  <p>
+    <span data-test-select-count="true">{{bundle.selected.length}}</span>
+    avengers selected.
+  </p>
 
   <p>
-    <button {{action bundle.selectAllAction}}>All</button>
-    <button {{action bundle.selectNoneAction}}>None</button>
-    <button {{action "levelUp" bundle.selected}} disabled={{bundle.isEmpty}}> Level Up! </button>
+    <button {{action "toggleVillans"}}
+      data-test-toggle-hidden-options="true">Toggle Hidden Fields: Villans</button>
+
+    <button {{action bundle.selectAllAction}}
+      data-test-select-all-action="true">All</button>
+
+    <button {{action bundle.selectNoneAction}}
+      data-test-select-none-action="true">None</button>
+
+    <button {{action "levelUp" bundle.selected}}
+      disabled={{bundle.isEmpty}}
+      data-test-bundle-action="true"> Bundle Action: Level Up! (Bundle) </button>
   </p>
 
   <form>
-    {{input value=(mut newModel.name)}}
-    {{input value=(mut newModel.level)}}
-    <button {{action "createAvenger"}}>Create Avenger</button>
+    <fieldset>
+      <legend>Create Super Hero</legend>
+      {{input value=(mut newModel.name) placeholder="Name"}}
+      {{input value=(mut newModel.level) placeholder="Level"}}
+      <button {{action "createAvenger"}}>Create Option: Avenger</button>
+    </fieldset>
   </form>
 
   <table class="table">
-    {{#each models as |model|}}
+    {{#each models as |model index|}}
       {{#bundle-select-option
           tagName="tr"
           classNames="is-selectable"
           option=model
           bundle=bundle as |bundleOption|}}
 
-        <td>
+        <td style="width: 50px;">
           <input type="checkbox"
             checked={{bundleOption.selected}}
-            onclick={{action bundleOption.toggleAction bubbles=false}} />
+            onclick={{action bundleOption.toggleAction bubbles=false}}
+            data-test-bundle-option-input={{index}} />
         </td>
 
-          <td>{{model.name}}</td>
-        <td>{{model.level}}</td>
+        <td>{{model.name}}</td>
+
+        <td style="width: 50px;"
+          data-test-hidden-bundle-action-value={{index}}>{{model.level}}</td>
       {{/bundle-select-option}}
     {{/each}}
   </table>
 
-  <button {{action "toggleVillans"}}>Toggle Villans</button>
-
   {{#if showVillans}}
     <table class="table">
-      {{#each otherModels as |model|}}
+      {{#each otherModels as |model index|}}
         {{#bundle-select-option
             tagName="tr"
             classNames="is-selectable"
             option=model
             bundle=bundle as |bundleOption|}}
 
-          <td>
+          <td style="width: 50px;">
             <input type="checkbox"
               checked={{bundleOption.selected}}
-              onclick={{action bundleOption.toggleAction bubbles=false}} />
+              onclick={{action bundleOption.toggleAction bubbles=false}}
+              data-test-hidden-bundle-option-input={{index}} />
           </td>
 
-            <td>{{model.name}}</td>
-          <td>{{model.level}}</td>
+          <td>{{model.name}}</td>
+
+          <td style="width: 50px;"
+            data-test-hidden-bundle-action-value={{index}}>{{model.level}}</td>
         {{/bundle-select-option}}
       {{/each}}
     </table>
   {{/if}}
-
 {{/bundle-select-group}}
