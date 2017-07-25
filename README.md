@@ -2,7 +2,7 @@
 
 This README outlines the details of collaborating on this Ember addon.
 
-[![Build Status](https://travis-ci.org/storyful/ember-bundle-select.svg)](https://travis-ci.org/intercom/ember-bundle-select)
+[![Build Status](https://travis-ci.org/storyful/ember-bundle-select.svg)](https://travis-ci.org/storyful/ember-bundle-select)
 
 ## Install
 
