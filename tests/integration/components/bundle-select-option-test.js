@@ -6,7 +6,6 @@ moduleForComponent('bundle-select-option', 'Integration | Component | bundle sel
 });
 
 skip('it renders', function(assert) {
-
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
@@ -21,5 +20,6 @@ skip('it renders', function(assert) {
     {{/bundle-select-option}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  // assert.throws(render, 'raises an error');
+  // assert.equal(this.$().text().trim(), 'template block text');
 });

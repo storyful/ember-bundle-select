@@ -1,11 +1,11 @@
-import { moduleForComponent, skip } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bundle-select-group', 'Integration | Component | bundle select group', {
   integration: true
 });
 
-skip('it renders', function(assert) {
+test('it renders', function(assert) {
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
