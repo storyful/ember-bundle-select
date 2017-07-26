@@ -3,14 +3,22 @@ import layout from '../templates/components/bundle-select-option';
 
 const { computed, get, assert, isPresent } = Ember;
 
+const NS = 'bundle-select-option';
+
 export default Ember.Component.extend({
 
   layout,
 
   didReceiveAttrs(){
     assert(
-      '{{bundle-select-option}} requires a valid bundle object',
-      isPresent( get(this, 'bundle') ));
+      `${NS} requires a valid bundle object`,
+      isPresent( get(this, 'bundle') )
+    );
+
+    assert(
+      `${NS} requires an option value`,
+      isPresent( get(this, 'option') )
+    );
 
     this._super(...arguments);
   },
@@ -31,12 +39,11 @@ export default Ember.Component.extend({
 
   click(e){
     e.stopPropagation();
-    return get(this, 'toggleOnClick') ? this.send('toggle') : null;
+    get(this, 'toggleOnClick') && this.send('toggle');
   },
 
   isSelected: computed('bundle.selected.[]', function(){
     return get(this, 'bundle.selected').indexOf( get(this, 'option')) > -1;
-  }),
-
+  })
 
 });

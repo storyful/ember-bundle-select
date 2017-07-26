@@ -1,25 +1,33 @@
-import { moduleForComponent, skip } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bundle-select-option', 'Integration | Component | bundle select option', {
   integration: true
 });
 
-skip('it renders', function(assert) {
+test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{bundle-select-option}}`);
+  this.set('bundle', {
+    selected: [],
+    options: [],
+    isEmpty: true,
+    toggleAction: () => {},
+    registerOptionAction: () => {},
+    unregisterOptionAction: () => {},
+    selectAllAction: () => {},
+    selectNoneAction: () => {}
+  });
 
-  assert.equal(this.$().text().trim(), '');
+  this.set('option', {});
 
   // Template block usage:
   this.render(hbs`
-    {{#bundle-select-option}}
+    {{#bundle-select-option bundle=bundle option=option}}
       template block text
     {{/bundle-select-option}}
   `);
 
-  // assert.throws(render, 'raises an error');
-  // assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'template block text');
 });
