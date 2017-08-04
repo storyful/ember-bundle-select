@@ -45,5 +45,5 @@ addons:
 
 after_success:
   - npm install -g codeclimate-test-reporter
-  - COVERAGE=true node_modules/.bin/ember ember test
+  - COVERAGE=true node_modules/.bin/ember test
   - codeclimate-test-reporter < coverage/lcov.info
