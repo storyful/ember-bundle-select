@@ -1,10 +1,12 @@
 # ember-bundle-select
 
-This README outlines the details of collaborating on this Ember addon.
+Bundle select primitive for Ember.
 
 [![Build Status](https://travis-ci.org/storyful/ember-bundle-select.svg)](https://travis-ci.org/storyful/ember-bundle-select)
 [![Code Climate](https://codeclimate.com/github/storyful/ember-bundle-select/badges/gpa.svg)](https://codeclimate.com/github/storyful/ember-bundle-select)
 [![Test Coverage](https://codeclimate.com/github/storyful/ember-bundle-select/badges/coverage.svg)](https://codeclimate.com/github/storyful/ember-bundle-select/coverage)
+
+[Demo](https://storyful.github.io/ember-bundle-select/)
 
 ## Install
 
@@ -33,6 +35,12 @@ ember install https://github.com/storyful/ember-bundle-select.git
   </table>
 {{/bundle-select-group}}
 ```
+
+#### Actions
+
+* bundle.selectAll
+* bundle.selectNone
+* bundleOption.toggleAction
 
 ## Installation
 
