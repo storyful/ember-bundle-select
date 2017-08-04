@@ -11,7 +11,10 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storyful/ember-bundle-select"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -49,6 +52,7 @@
     "node": ">= 4"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "http://storyful.github.io/ember-bundle-select/"
   }
 }
