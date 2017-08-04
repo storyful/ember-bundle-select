@@ -12,6 +12,7 @@ cache:
 
 env:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
+  - COVERAGE=true
   - EMBER_TRY_SCENARIO=ember-lts-2.4
   - EMBER_TRY_SCENARIO=ember-lts-2.8
   - EMBER_TRY_SCENARIO=ember-release
@@ -38,3 +39,11 @@ script:
   # Usually, it's ok to finish the test scenario without reverting
   #  to the addon's original dependency state, skipping "cleanup".
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
+
+addons:
+  code_climate:
+    repo_token: b3e3ab13c10bfac8203c604f6602e557ede8a22dcb0921cf087928bc8f8f84f0
+
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < coverage/lcov.info
