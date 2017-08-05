@@ -1,7 +1,7 @@
 {
   "name": "ember-bundle-select",
   "version": "0.2.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Bundle select primitives",
   "keywords": [
     "ember-addon"
   ],
