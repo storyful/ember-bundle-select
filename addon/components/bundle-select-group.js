@@ -4,8 +4,7 @@ import layout from '../templates/components/bundle-select-group';
 const {
   computed,
   get,
-  A,
-  run
+  A
 } = Ember;
 
 export default Ember.Component.extend({
@@ -24,7 +23,7 @@ export default Ember.Component.extend({
     },
 
     unregisterOption(option){
-      this.isSelected(option) ? run.next(() => this.send('deselectOption', option)) : null;
+      this.isSelected(option) ? this.send('deselectOption', option) : null;
       get(this, 'options').removeObject( option );
     },
 

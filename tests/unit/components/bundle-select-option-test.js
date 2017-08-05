@@ -1,5 +1,6 @@
 import {
   moduleForComponent,
+  test,
   skip
 } from 'ember-qunit';
 // import Ember from 'ember';
@@ -11,4 +12,27 @@ skip('didReceiveAttrs');
 skip('didInsertElement');
 skip('willDestroyElement');
 skip('toggle');
-skip('isSelected');
+
+test('isSelected', function(assert) {
+  const option = { foo: 'bar' };
+
+  const bundle = {
+    selected: [],
+    options: [],
+    isEmpty: true,
+    toggleAction: () => {},
+    registerOptionAction: () => {},
+    unregisterOptionAction: () => {},
+    selectAllAction: () => {},
+    selectNoneAction: () => {}
+  };
+
+  const component = this.subject({
+    option: option,
+    bundle: bundle
+  });
+
+  component.set('option', option);
+
+  assert.equal(component.get('isSelected'), false);
+});

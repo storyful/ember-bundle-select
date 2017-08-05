@@ -43,14 +43,21 @@ test('unregisterOption', function(assert) {
   const option = { foo: 'bar' };
 
   component.send('registerOption', option);
+  component.send('selectOption', option);
 
   assert.deepEqual(component.get('options')[0], option,
     'expected option to be registred');
+
+  assert.deepEqual(component.get('selected')[0], option,
+    'expected option to be selected');
 
   component.send('unregisterOption', option);
 
   assert.deepEqual(component.get('options')[0], undefined,
     'expected option to be unregistred');
+
+  assert.equal(component.get('selected.length'), 0,
+    'expected option not to be selected');
 });
 
 test('selectOption', function(assert) {
