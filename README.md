@@ -5,6 +5,7 @@ Bundle select primitive for Ember.
 [![Build Status](https://travis-ci.org/storyful/ember-bundle-select.svg)](https://travis-ci.org/storyful/ember-bundle-select)
 [![Code Climate](https://codeclimate.com/github/storyful/ember-bundle-select/badges/gpa.svg)](https://codeclimate.com/github/storyful/ember-bundle-select)
 [![Test Coverage](https://codeclimate.com/github/storyful/ember-bundle-select/badges/coverage.svg)](https://codeclimate.com/github/storyful/ember-bundle-select/coverage)
+[![Dependency Status](https://www.versioneye.com/user/projects/59858fa10fb24f003b1f7e68/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/59858fa10fb24f003b1f7e68)
 
 [Demo](https://storyful.github.io/ember-bundle-select/)
 

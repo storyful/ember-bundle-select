@@ -47,7 +47,6 @@
     "ember-sinon": "^0.7.0",
     "ember-source": "~2.12.0",
     "ember-test-selectors": "^0.3.6",
-    "ember-welcome-page": "^2.0.2",
     "loader.js": "^4.2.3"
   },
   "engines": {
