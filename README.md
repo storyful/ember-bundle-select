@@ -44,25 +44,27 @@ ember install https://github.com/storyful/ember-bundle-select.git
 * bundle.selectNone
 * bundleOption.toggleAction
 
-## Installation
+## Collaborating
+
+### Installation
 
 * `git clone <repository-url>` this repository
 * `cd ember-bundle-select`
 * `npm install`
 * `bower install`
 
-## Running
+### Running
 
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Running Tests
+### Running Tests
 
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-## Building
+### Building
 
 * `ember build`
 
