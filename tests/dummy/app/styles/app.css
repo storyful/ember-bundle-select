@@ -12,6 +12,10 @@
   padding: 10px;
 }
 
+.fieldset {
+  margin:0 0 3px 0;
+}
+
 .table {
   width: 100%;
   list-style: none;

@@ -1,12 +1,12 @@
 {{#bundle-select-group as |bundle|}}
   <p>
     <span data-test-select-count="true">{{bundle.selected.length}}</span>
-    avengers selected.
+    items selected.
   </p>
 
   <p>
     <button {{action "toggleVillans"}}
-      data-test-toggle-hidden-options="true">Toggle Hidden Fields: Villans</button>
+      data-test-toggle-hidden-options="true">Toggle Hidden Options</button>
 
     <button {{action bundle.selectAllAction}}
       data-test-select-all-action="true">All</button>
@@ -20,7 +20,7 @@
   </p>
 
   <form>
-    <fieldset style="margin:0 0 3px 0;">
+    <fieldset class="fieldset">
       <legend>Create Super Hero</legend>
       {{input value=(mut newModel.name) placeholder="Name"}}
       {{input value=(mut newModel.level) placeholder="Level"}}
@@ -28,78 +28,10 @@
     </fieldset>
   </form>
 
-  <ul class="table">
-    {{#each models as |model index|}}
-      {{#bundle-select-option
-          tagName="li"
-          classNames="is-selectable table-option"
-          option=model
-          bundle=bundle as |bundleOption|}}
-        <div class="table-row">
-          <div style="width: 50px;">
-            <input type="checkbox"
-              checked={{bundleOption.selected}}
-              onclick={{action bundleOption.toggleAction bubbles=false}}
-              data-test-bundle-option-input={{index}} />
-          </div>
-
-          <div class="table-main">{{model.name}}</div>
-
-          <div style="width: 50px; text-align: center;"
-            data-test-hidden-bundle-action-value={{index}}>{{model.level}}</div>
-        </div>
-
-        {{#if model.children}}
-          <ul class="table-child">
-            {{#each model.children as |child index|}}
-              {{#bundle-select-option
-                  tagName="li"
-                  classNames="is-selectable table-row"
-                  option=child
-                  parentOption=model
-                  bundle=bundle as |childBundleOption|}}
-                <div style="width: 50px;">
-                  <input type="checkbox"
-                    checked={{childBundleOption.selected}}
-                    onclick={{action childBundleOption.toggleAction bubbles=false}}
-                    data-test-child-bundle-option-input={{index}} />
-                </div>
-
-                <div class="table-main">{{child.name}}</div>
-
-                <div style="width: 50px; text-align: center;"
-                  data-test-hidden-child-bundle-action-value={{index}}>{{child.level}}</div>
-              {{/bundle-select-option}}
-            {{/each}}
-          </ul>
-        {{/if}}
-
-      {{/bundle-select-option}}
-    {{/each}}
-  </ul>
+  {{table-list models=models bundle=bundle}}
 
   {{#if showVillans}}
-    <ul class="table">
-      {{#each otherModels as |model index|}}
-        {{#bundle-select-option
-            tagName="li"
-            classNames="is-selectable"
-            option=model
-            bundle=bundle as |bundleOption|}}
-
-          <div style="width: 50px;">
-            <input type="checkbox"
-              checked={{bundleOption.selected}}
-              onclick={{action bundleOption.toggleAction bubbles=false}}
-              data-test-hidden-bundle-option-input={{index}} />
-          </div>
-
-          <div class="table-main">{{model.name}}</div>
-
-          <div style="width: 50px; text-align: center;"
-            data-test-hidden-bundle-action-value={{index}}>{{model.level}}</div>
-        {{/bundle-select-option}}
-      {{/each}}
-    </ul>
+    {{table-list models=otherModels bundle=bundle}}
   {{/if}}
+
 {{/bundle-select-group}}
