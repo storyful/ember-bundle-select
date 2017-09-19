@@ -43,7 +43,7 @@ test('unregisterOption', function(assert) {
   const option = { foo: 'bar' };
 
   component.send('registerOption', option);
-  component.send('selectOption', option);
+  component.send('selectOptions', [option]);
 
   assert.deepEqual(component.get('options')[0], option,
     'expected option to be registred');
@@ -60,7 +60,7 @@ test('unregisterOption', function(assert) {
     'expected option not to be selected');
 });
 
-test('selectOption', function(assert) {
+test('selectOptions', function(assert) {
   const component = this.subject();
   const option = { foo: 'bar' };
 
@@ -72,13 +72,13 @@ test('selectOption', function(assert) {
   assert.equal(component.get('selected.length'), 0,
     'expected option not to be selected');
 
-  component.send('selectOption', option);
+  component.send('selectOptions', [option]);
 
   assert.deepEqual(component.get('selected')[0], option,
     'expected option to be selected');
 });
 
-test('deselectOption', function(assert) {
+test('deselectOptions', function(assert) {
   const component = this.subject();
   const option = { foo: 'bar' };
 
@@ -86,11 +86,11 @@ test('deselectOption', function(assert) {
   assert.deepEqual(component.get('options')[0], option,
     'expected option to be registred');
 
-  component.send('selectOption', option);
+  component.send('selectOptions', [option]);
   assert.deepEqual(component.get('selected')[0], option,
     'expected option to be selected');
 
-  component.send('deselectOption', option);
+  component.send('deselectOptions', [option]);
 
   assert.equal(component.get('selected.length'), 0,
     'expected option not to be selected');

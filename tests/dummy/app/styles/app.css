@@ -14,12 +14,31 @@
 
 .table {
   width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.table td {
+.table-row {
   padding: 5px;
   border: solid 1px #ccc;
+  display: flex;
 }
+
+.table-main { flex: 1; }
+
+.table-child {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table-child > * {
+  padding-left: 30px;
+  border-top: 0;
+}
+
+.table-option { margin-bottom: 4px; }
 
 .is-selectable {
   cursor: pointer;

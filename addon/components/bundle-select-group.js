@@ -14,25 +14,27 @@ export default Ember.Component.extend({
   init(){
     this._super(...arguments);
     this.set('options', A());
+    this.set('relationships', A());
     this.set('selected', A());
   },
 
   actions: {
-    registerOption(option){
+    registerOption(option, parent){
       get(this, 'options').pushObject( option );
+      if(parent) get(this, 'relationships').pushObject( { parent, child: option } );
     },
 
     unregisterOption(option){
-      this.isSelected(option) ? this.send('deselectOption', option) : null;
+      this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
       get(this, 'options').removeObject( option );
     },
 
-    selectOption(option){
-      get(this, 'selected').pushObject( option );
+    selectOptions(options){
+      get(this, 'selected').pushObjects( options );
     },
 
-    deselectOption(option){
-      get(this, 'selected').removeObject( option );
+    deselectOptions(options){
+      get(this, 'selected').removeObjects( options );
     },
 
     selectAll(){
@@ -44,9 +46,10 @@ export default Ember.Component.extend({
     },
 
     toggle(option){
+      const options = this.getOptions(option);
       return this.isSelected(option)  ?
-             this.send('deselectOption', option) :
-             this.send('selectOption', option);
+             this.send('deselectOptions', options) :
+             this.send('selectOptions', options);
     }
   },
 
@@ -54,6 +57,13 @@ export default Ember.Component.extend({
 
   isSelected(option){
     return this.get('selected').indexOf( option ) > -1;
+  },
+
+  getOptions(option) {
+    const children = get(this, 'relationships')
+      .filter((relationship) => option.toString() == relationship.parent.toString())
+      .map((relationship) => relationship.child);
+    return [option, ...children];
   }
 
 });
