@@ -34,15 +34,23 @@ test('registerOption', function(assert) {
   const optionWithParentOption = { foo: 'bar', parentOption: option };
 
   component.send('registerOption', option, undefined);
-
   assert.deepEqual(component.get('options')[0], option,
     'expected to register option');
 
   component.send('registerOption', optionWithParentOption, option);
-
   assert.deepEqual(component.get('options')[1], optionWithParentOption,
     'expected to register option');
+  assert.equal(component.get('relationships.length'), 1,
+    'expected to register relationship');
+});
 
+test('registerRelationthip', function(assert) {
+  const component = this.subject();
+
+  const parentOption = { foo: 'parent' };
+  const childOption = { foo: 'child', parentOption };
+
+  component.send('registerRelationthip', childOption, parentOption);
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
 });

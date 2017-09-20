@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   actions: {
     registerOption(option, parent){
       get(this, 'options').pushObject( option );
-      (parent) && this.registerParentOption(option, parent);
+      (parent) && this.send('registerRelationthip', option, parent);
     },
 
     registerRelationthip(option, parent){
