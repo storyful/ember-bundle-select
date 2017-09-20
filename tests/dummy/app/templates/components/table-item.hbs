@@ -1,0 +1,12 @@
+<div style="width: 50px;">
+  <input type="checkbox"
+    checked={{bundleOption.selected}}
+    onclick={{action bundleOption.toggleAction bubbles=false}}
+    data-test-child-bundle-option-input={{index}} />
+
+</div>
+
+<div class="table-main">{{model.name}}</div>
+
+<div style="width: 50px; text-align: center;"
+  data-test-hidden-child-bundle-action-value={{index}}>{{model.level}}</div>
