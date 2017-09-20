@@ -1,8 +1,5 @@
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
 // import Ember from 'ember';
+import { moduleForComponent, test } from 'ember-qunit';
 // const { run } = Ember;
 
 moduleForComponent('bundle-select-group', 'Unit | Component | bundle select group', { unit: true });
@@ -52,13 +49,13 @@ test('registerOption with parent', function(assert) {
     'expected to register relationship');
 });
 
-test('registerRelationthip', function(assert) {
+test('createRelationthip', function(assert) {
   const component = this.subject();
 
   const parentOption = { foo: 'parent' };
   const childOption = { foo: 'child', parentOption };
 
-  component.send('registerRelationthip', childOption, parentOption);
+  component.createRelationthip(childOption, parentOption);
 
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
@@ -86,16 +83,16 @@ test('unregisterOption', function(assert) {
     'expected option not to be selected');
 });
 
-test('unregisterRelationship', function(assert) {
+test('destroyRelationships', function(assert) {
   const component = this.subject();
 
   const option = { foo: 'child' };
   const parentOption = { foo: 'parent' };
-  const relationship = { option, parentOption };
+  const relationship = { option, parent: parentOption };
 
-  component.set('relationships', [relationship]);
+  component.get('relationships').pushObject(relationship);
 
-  component.send('unregisterRelationship', parentOption);
+  component.destroyRelationships(parentOption);
 
   assert.equal(component.get('relationships').length, 0,
     'expected relationship to be unregistred');
@@ -149,6 +146,7 @@ test('selectAll', function(assert) {
   component.send('registerOption', options[0]);
   component.send('registerOption', options[1]);
   component.send('registerOption', options[2]);
+
   assert.equal(component.get('options.length'), 3,
     'expected options to be registred');
 
