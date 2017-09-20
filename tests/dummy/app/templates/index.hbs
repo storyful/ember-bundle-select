@@ -1,12 +1,12 @@
 {{#bundle-select-group as |bundle|}}
   <p>
     <span data-test-select-count="true">{{bundle.selected.length}}</span>
-    avengers selected.
+    items selected.
   </p>
 
   <p>
-    <button {{action "toggleVillans"}}
-      data-test-toggle-hidden-options="true">Toggle Hidden Fields: Villans</button>
+    <button {{action "toggleHiddenOptions"}}
+      data-test-toggle-hidden-options="true">Toggle Hidden Options</button>
 
     <button {{action bundle.selectAllAction}}
       data-test-select-all-action="true">All</button>
@@ -20,59 +20,18 @@
   </p>
 
   <form>
-    <fieldset>
+    <fieldset class="fieldset">
       <legend>Create Super Hero</legend>
       {{input value=(mut newModel.name) placeholder="Name"}}
       {{input value=(mut newModel.level) placeholder="Level"}}
-      <button {{action "createAvenger"}}>Create Option: Avenger</button>
+      <button {{action "create"}}>Create Option</button>
     </fieldset>
   </form>
 
-  <table class="table">
-    {{#each models as |model index|}}
-      {{#bundle-select-option
-          tagName="tr"
-          classNames="is-selectable"
-          option=model
-          bundle=bundle as |bundleOption|}}
+  {{table-list models=models bundle=bundle}}
 
-        <td style="width: 50px;">
-          <input type="checkbox"
-            checked={{bundleOption.selected}}
-            onclick={{action bundleOption.toggleAction bubbles=false}}
-            data-test-bundle-option-input={{index}} />
-        </td>
-
-        <td>{{model.name}}</td>
-
-        <td style="width: 50px;"
-          data-test-hidden-bundle-action-value={{index}}>{{model.level}}</td>
-      {{/bundle-select-option}}
-    {{/each}}
-  </table>
-
-  {{#if showVillans}}
-    <table class="table">
-      {{#each otherModels as |model index|}}
-        {{#bundle-select-option
-            tagName="tr"
-            classNames="is-selectable"
-            option=model
-            bundle=bundle as |bundleOption|}}
-
-          <td style="width: 50px;">
-            <input type="checkbox"
-              checked={{bundleOption.selected}}
-              onclick={{action bundleOption.toggleAction bubbles=false}}
-              data-test-hidden-bundle-option-input={{index}} />
-          </td>
-
-          <td>{{model.name}}</td>
-
-          <td style="width: 50px;"
-            data-test-hidden-bundle-action-value={{index}}>{{model.level}}</td>
-        {{/bundle-select-option}}
-      {{/each}}
-    </table>
+  {{#if showHiddenOptions}}
+    {{table-list models=otherModels bundle=bundle}}
   {{/if}}
+
 {{/bundle-select-group}}

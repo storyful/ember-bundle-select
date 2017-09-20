@@ -24,10 +24,10 @@ export default Ember.Component.extend({
   },
 
   didInsertElement(){
-    get(this, 'bundle.registerOptionAction')( get(this, 'option') )
+    get(this, 'bundle.registerOptionAction')( get(this, 'option'), get(this, 'parentOption') );
   },
 
-  willDestroyElement(){
+  didDestroyElement(){
     get(this, 'bundle.unregisterOptionAction')( get(this, 'option') )
   },
 

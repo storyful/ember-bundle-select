@@ -36,6 +36,31 @@ ember install https://github.com/storyful/ember-bundle-select.git
     {{/each}}
   </table>
 {{/bundle-select-group}}
+
+{{!-- With children options --}}
+
+{{#bundle-select-group as |bundle|}}
+  <ul class="table">
+    {{#each models as |model|}}
+      {{#bundle-select-option tagName="li" option=model bundle=bundle as |bundleOption|}}
+
+        ...
+
+        {{#bundle-select-option option=model.child
+            parentOption=model
+            bundle=bundle as |bundleOption|}}
+          <div>
+            <input type="checkbox"
+              checked={{bundleOption.selected}}
+              onclick={{action bundleOption.toggleAction}} />
+          </div>
+
+          <div>{{model.child.name}}</div>
+        {{/bundle-select-option}}
+      {{/bundle-select-option}}
+    {{/each}}
+  </ul>
+{{/bundle-select-group}}
 ```
 
 #### Actions
