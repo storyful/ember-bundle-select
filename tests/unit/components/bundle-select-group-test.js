@@ -194,4 +194,21 @@ test('getOptions', function(assert){
 
   assert.equal(component.getOptions(parentOption).length, 3,
     'expected to return option and its children');
+});
+
+test('destroyRelationships', function(assert){
+  const component = this.subject();
+
+  const parentOption = { id: 1, name: 'foo' };
+  const optionA = { id: 1, name: 'foo' };
+
+  component.send('registerOption', optionA, parentOption);
+
+  assert.equal(component.get('relationships').length, 1,
+    'expected to return a relationship');
+
+  component.send('destroyRelationships', optionA);
+
+  assert.equal(component.get('relationships').length, 0,
+    'expected to return 0 relationships');
 })
