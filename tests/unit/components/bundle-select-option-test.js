@@ -41,7 +41,7 @@ test('didInsertElement', function(assert) {
     'it should call bundle.registerOptionAction with option');
 });
 
-test('willDestroyElement', function(assert) {
+test('didDestroyElement', function(assert) {
   const option = { foo: 'bar' };
 
   const bundle = {
@@ -60,7 +60,7 @@ test('willDestroyElement', function(assert) {
     bundle: bundle
   });
 
-  component.willDestroyElement();
+  component.didDestroyElement();
 
   assert.ok(bundle.unregisterOptionAction.called,
     'it should call bundle.unregisterOptionAction');

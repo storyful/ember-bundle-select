@@ -83,21 +83,22 @@
       {{#each otherModels as |model index|}}
         {{#bundle-select-option
             tagName="li"
-            classNames="is-selectable"
+            classNames="is-selectable table-option"
             option=model
             bundle=bundle as |bundleOption|}}
+          <div class="table-row">
+            <div style="width: 50px;">
+              <input type="checkbox"
+                checked={{bundleOption.selected}}
+                onclick={{action bundleOption.toggleAction bubbles=false}}
+                data-test-hidden-bundle-option-input={{index}} />
+            </div>
 
-          <div style="width: 50px;">
-            <input type="checkbox"
-              checked={{bundleOption.selected}}
-              onclick={{action bundleOption.toggleAction bubbles=false}}
-              data-test-hidden-bundle-option-input={{index}} />
+            <div class="table-main">{{model.name}}</div>
+
+            <div style="width: 50px; text-align: center;"
+              data-test-hidden-bundle-action-value={{index}}>{{model.level}}</div>
           </div>
-
-          <div class="table-main">{{model.name}}</div>
-
-          <div style="width: 50px; text-align: center;"
-            data-test-hidden-bundle-action-value={{index}}>{{model.level}}</div>
         {{/bundle-select-option}}
       {{/each}}
     </ul>

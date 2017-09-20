@@ -31,11 +31,20 @@ test('isEmpty', function(assert) {
 test('registerOption', function(assert) {
   const component = this.subject();
   const option = { foo: 'bar' };
+  const optionWithParentOption = { foo: 'bar', parentOption: option };
 
-  component.send('registerOption', option);
+  component.send('registerOption', option, undefined);
 
   assert.deepEqual(component.get('options')[0], option,
     'expected to register option');
+
+  component.send('registerOption', optionWithParentOption, option);
+
+  assert.deepEqual(component.get('options')[1], optionWithParentOption,
+    'expected to register option');
+
+  assert.equal(component.get('relationships.length'), 1,
+    'expected to register relationship');
 });
 
 test('unregisterOption', function(assert) {

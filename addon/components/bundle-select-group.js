@@ -25,8 +25,8 @@ export default Ember.Component.extend({
     },
 
     unregisterOption(option){
-      this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
       get(this, 'options').removeObject( option );
+      this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
     },
 
     selectOptions(options){
