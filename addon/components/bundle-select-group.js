@@ -76,7 +76,7 @@ export default Ember.Component.extend({
   destroyRelationships(option) {
     let relationshipsToDestroy = get(this, 'relationships')
       .filter((relationship) => {
-        option.toString() == relationship.child.toString() ||
+        option.toString() == relationship.option.toString() ||
         option.toString() == relationship.parent.toString()
       })
     get(this, 'relationships').removeObjects( relationshipsToDestroy );
