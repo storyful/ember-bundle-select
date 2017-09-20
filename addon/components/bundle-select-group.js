@@ -30,10 +30,6 @@ export default Ember.Component.extend({
       this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
     },
 
-    unregisterRelationship(){
-      return null;
-    },
-
     selectOptions(options){
       get(this, 'selected').pushObjects( options );
     },
@@ -67,8 +63,8 @@ export default Ember.Component.extend({
 
   getOptions(option) {
     const children = get(this, 'relationships')
-      .filter((relationship) => option.toString() == relationship.parent.toString())
-      .map((relationship) => relationship.option);
+      .filter(relationship => option.toString() == relationship.parent.toString())
+      .map(relationship => relationship.option);
 
     return [option, ...children];
   },
