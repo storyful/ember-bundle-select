@@ -30,6 +30,7 @@ export default Ember.Component.extend({
 
     unregisterOption(option){
       get(this, 'options').removeObject( option );
+      this.destroyRelationships(option);
       this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
     },
 
@@ -70,6 +71,15 @@ export default Ember.Component.extend({
       .map((relationship) => relationship.option);
 
     return [option, ...children];
+  },
+
+  destroyRelationships(option) {
+    let relationshipsToDestroy = get(this, 'relationships')
+      .filter((relationship) => {
+        option.toString() == relationship.option.toString() ||
+        option.toString() == relationship.parent.toString()
+      })
+    get(this, 'relationships').removeObjects( relationshipsToDestroy );
   }
 
 });
