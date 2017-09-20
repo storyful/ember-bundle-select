@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   actions: {
     registerOption(option, parent){
       get(this, 'options').pushObject( option );
-      (parent) && this.createRelationthip(option, parent);
+      (parent) && this.createRelationship(option, parent);
     },
 
     unregisterOption(option){
@@ -69,7 +69,7 @@ export default Ember.Component.extend({
     return [option, ...children];
   },
 
-  createRelationthip(option, parent){
+  createRelationship(option, parent){
     get(this, 'relationships').pushObject( { option, parent } )
   },
 
@@ -78,7 +78,6 @@ export default Ember.Component.extend({
       return (option.toString() == relationship.option.toString() ||
               option.toString() == relationship.parent.toString());
     });
-
     (relationships.length) && get(this, 'relationships').removeObjects( relationships );
   }
 

@@ -49,13 +49,13 @@ test('registerOption with parent', function(assert) {
     'expected to register relationship');
 });
 
-test('createRelationthip', function(assert) {
+test('createRelationship', function(assert) {
   const component = this.subject();
 
   const parentOption = { foo: 'parent' };
   const childOption = { foo: 'child', parentOption };
 
-  component.createRelationthip(childOption, parentOption);
+  component.createRelationship(childOption, parentOption);
 
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
@@ -231,7 +231,7 @@ test('destroyRelationships', function(assert){
   assert.equal(component.get('relationships').length, 1,
     'expected to return a relationship');
 
-  component.send('destroyRelationships', optionA);
+  component.destroyRelationships(optionA);
 
   assert.equal(component.get('relationships').length, 0,
     'expected to return 0 relationships');
