@@ -21,11 +21,7 @@ export default Ember.Component.extend({
   actions: {
     registerOption(option, parent){
       get(this, 'options').pushObject( option );
-      (parent) && this.send('registerRelationthip', option, parent);
-    },
-
-    registerRelationthip(option, parent){
-      get(this, 'relationships').pushObject( { option, parent } )
+      (parent) && this.createRelationthip(option, parent);
     },
 
     unregisterOption(option){
@@ -67,19 +63,23 @@ export default Ember.Component.extend({
 
   getOptions(option) {
     const children = get(this, 'relationships')
-      .filter((relationship) => option.toString() == relationship.parent.toString())
-      .map((relationship) => relationship.option);
+      .filter(relationship => option.toString() == relationship.parent.toString())
+      .map(relationship => relationship.option);
 
     return [option, ...children];
   },
 
+  createRelationthip(option, parent){
+    get(this, 'relationships').pushObject( { option, parent } )
+  },
+
   destroyRelationships(option) {
-    let relationshipsToDestroy = get(this, 'relationships')
-      .filter((relationship) => {
-        option.toString() == relationship.option.toString() ||
-        option.toString() == relationship.parent.toString()
-      })
-    get(this, 'relationships').removeObjects( relationshipsToDestroy );
+    const relationships = get(this, 'relationships').filter(relationship => {
+      return (option.toString() == relationship.option.toString() ||
+              option.toString() == relationship.parent.toString());
+    });
+
+    (relationships.length) && get(this, 'relationships').removeObjects( relationships );
   }
 
 });

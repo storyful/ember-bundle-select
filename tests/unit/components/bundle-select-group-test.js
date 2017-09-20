@@ -1,8 +1,5 @@
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
 // import Ember from 'ember';
+import { moduleForComponent, test } from 'ember-qunit';
 // const { run } = Ember;
 
 moduleForComponent('bundle-select-group', 'Unit | Component | bundle select group', { unit: true });
@@ -31,26 +28,35 @@ test('isEmpty', function(assert) {
 test('registerOption', function(assert) {
   const component = this.subject();
   const option = { foo: 'bar' };
-  const optionWithParentOption = { foo: 'bar', parentOption: option };
 
-  component.send('registerOption', option, undefined);
+  component.send('registerOption', option);
+
+  assert.deepEqual(component.get('options')[0], option,
+    'expected to register option');
+});
+
+test('registerOption with parent', function(assert) {
+  const component = this.subject();
+  const parentOption = { foo: 'bar' };
+  const option = { foo: 'bar', parentOption: option };
+
+  component.send('registerOption', option, parentOption);
+
   assert.deepEqual(component.get('options')[0], option,
     'expected to register option');
 
-  component.send('registerOption', optionWithParentOption, option);
-  assert.deepEqual(component.get('options')[1], optionWithParentOption,
-    'expected to register option');
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
 });
 
-test('registerRelationthip', function(assert) {
+test('createRelationthip', function(assert) {
   const component = this.subject();
 
   const parentOption = { foo: 'parent' };
   const childOption = { foo: 'child', parentOption };
 
-  component.send('registerRelationthip', childOption, parentOption);
+  component.createRelationthip(childOption, parentOption);
+
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
 });
@@ -64,6 +70,7 @@ test('unregisterOption', function(assert) {
 
   assert.deepEqual(component.get('options')[0], option,
     'expected option to be registred');
+
   assert.deepEqual(component.get('selected')[0], option,
     'expected option to be selected');
 
@@ -71,8 +78,24 @@ test('unregisterOption', function(assert) {
 
   assert.deepEqual(component.get('options')[0], undefined,
     'expected option to be unregistred');
+
   assert.equal(component.get('selected.length'), 0,
     'expected option not to be selected');
+});
+
+test('destroyRelationships', function(assert) {
+  const component = this.subject();
+
+  const option = { foo: 'child' };
+  const parentOption = { foo: 'parent' };
+  const relationship = { option, parent: parentOption };
+
+  component.get('relationships').pushObject(relationship);
+
+  component.destroyRelationships(parentOption);
+
+  assert.equal(component.get('relationships').length, 0,
+    'expected relationship to be unregistred');
 });
 
 test('selectOptions', function(assert) {
@@ -123,6 +146,7 @@ test('selectAll', function(assert) {
   component.send('registerOption', options[0]);
   component.send('registerOption', options[1]);
   component.send('registerOption', options[2]);
+
   assert.equal(component.get('options.length'), 3,
     'expected options to be registred');
 

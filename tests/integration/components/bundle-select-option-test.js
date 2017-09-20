@@ -74,7 +74,7 @@ skip('it handles parent option', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-    {{bundle-select-option bundle=bundle option=option parent=parent}}
+    {{bundle-select-option bundle=bundle option=option parentOption=parent}}
   `);
 
   assert.ok(true);
