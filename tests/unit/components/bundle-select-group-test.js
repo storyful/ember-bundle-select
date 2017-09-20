@@ -49,13 +49,13 @@ test('registerOption with parent', function(assert) {
     'expected to register relationship');
 });
 
-test('createRelationship', function(assert) {
+test('registerRelationship', function(assert) {
   const component = this.subject();
 
   const parentOption = { foo: 'parent' };
   const childOption = { foo: 'child', parentOption };
 
-  component.createRelationship(childOption, parentOption);
+  component.registerRelationship(childOption, parentOption);
 
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
@@ -83,7 +83,7 @@ test('unregisterOption', function(assert) {
     'expected option not to be selected');
 });
 
-test('destroyRelationships', function(assert) {
+test('unregisterRelationships', function(assert) {
   const component = this.subject();
 
   const option = { foo: 'child' };
@@ -92,7 +92,7 @@ test('destroyRelationships', function(assert) {
 
   component.get('relationships').pushObject(relationship);
 
-  component.destroyRelationships(parentOption);
+  component.unregisterRelationships(parentOption);
 
   assert.equal(component.get('relationships').length, 0,
     'expected relationship to be unregistred');
@@ -220,7 +220,7 @@ test('getOptions', function(assert){
     'expected to return option and its children');
 });
 
-test('destroyRelationships', function(assert){
+test('unregisterRelationships', function(assert){
   const component = this.subject();
 
   const parentOption = { id: 1, name: 'foo' };
@@ -231,7 +231,7 @@ test('destroyRelationships', function(assert){
   assert.equal(component.get('relationships').length, 1,
     'expected to return a relationship');
 
-  component.destroyRelationships(optionA);
+  component.unregisterRelationships(optionA);
 
   assert.equal(component.get('relationships').length, 0,
     'expected to return 0 relationships');

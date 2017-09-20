@@ -21,12 +21,12 @@ export default Ember.Component.extend({
   actions: {
     registerOption(option, parent){
       get(this, 'options').pushObject( option );
-      (parent) && this.createRelationship(option, parent);
+      (parent) && this.registerRelationship(option, parent);
     },
 
     unregisterOption(option){
       get(this, 'options').removeObject( option );
-      this.destroyRelationships(option);
+      this.unregisterRelationships(option);
       this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
     },
 
@@ -69,11 +69,11 @@ export default Ember.Component.extend({
     return [option, ...children];
   },
 
-  createRelationship(option, parent){
+  registerRelationship(option, parent){
     get(this, 'relationships').pushObject( { option, parent } )
   },
 
-  destroyRelationships(option) {
+  unregisterRelationships(option) {
     const relationships = get(this, 'relationships').filter(relationship => {
       return (option.toString() == relationship.option.toString() ||
               option.toString() == relationship.parent.toString());
