@@ -57,7 +57,6 @@ ember install https://github.com/storyful/ember-bundle-select.git
 
           <div>{{model.child.name}}</div>
         {{/bundle-select-option}}
-
       {{/bundle-select-option}}
     {{/each}}
   </ul>
