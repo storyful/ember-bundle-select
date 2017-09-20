@@ -34,6 +34,10 @@ export default Ember.Component.extend({
       this.isSelected(option) ? this.send('deselectOptions', [option]) : null;
     },
 
+    unregisterRelationship(){
+      return null;
+    },
+
     selectOptions(options){
       get(this, 'selected').pushObjects( options );
     },

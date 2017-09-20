@@ -31,15 +31,23 @@ test('isEmpty', function(assert) {
 test('registerOption', function(assert) {
   const component = this.subject();
   const option = { foo: 'bar' };
-  const optionWithParentOption = { foo: 'bar', parentOption: option };
 
-  component.send('registerOption', option, undefined);
+  component.send('registerOption', option);
+
+  assert.deepEqual(component.get('options')[0], option,
+    'expected to register option');
+});
+
+test('registerOption with parent', function(assert) {
+  const component = this.subject();
+  const parentOption = { foo: 'bar' };
+  const option = { foo: 'bar', parentOption: option };
+
+  component.send('registerOption', option, parentOption);
+
   assert.deepEqual(component.get('options')[0], option,
     'expected to register option');
 
-  component.send('registerOption', optionWithParentOption, option);
-  assert.deepEqual(component.get('options')[1], optionWithParentOption,
-    'expected to register option');
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
 });
@@ -51,6 +59,7 @@ test('registerRelationthip', function(assert) {
   const childOption = { foo: 'child', parentOption };
 
   component.send('registerRelationthip', childOption, parentOption);
+
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
 });
@@ -80,23 +89,11 @@ test('unregisterOption', function(assert) {
 test('unregisterRelationship', function(assert) {
   const component = this.subject();
 
-  const childOption = { foo: 'child' };
+  const option = { foo: 'child' };
   const parentOption = { foo: 'parent' };
+  const relationship = { option, parentOption };
 
-  // setup
-
-  component.send('registerOption', childOption, parentOption);
-
-  assert.deepEqual(component.get('options')[0], childOption,
-    'expected option to be registred');
-
-  assert.deepEqual(component.get('selected')[1], parentOption,
-    'expected parent option to be registred');
-
-  assert.equal(component.get('relationships').length, 1,
-    'expected relationship to be created');
-
-  // unit test
+  component.set('relationships', [relationship]);
 
   component.send('unregisterRelationship', parentOption);
 
