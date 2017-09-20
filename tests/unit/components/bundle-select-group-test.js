@@ -34,15 +34,23 @@ test('registerOption', function(assert) {
   const optionWithParentOption = { foo: 'bar', parentOption: option };
 
   component.send('registerOption', option, undefined);
-
   assert.deepEqual(component.get('options')[0], option,
     'expected to register option');
 
   component.send('registerOption', optionWithParentOption, option);
-
   assert.deepEqual(component.get('options')[1], optionWithParentOption,
     'expected to register option');
+  assert.equal(component.get('relationships.length'), 1,
+    'expected to register relationship');
+});
 
+test('registerRelationthip', function(assert) {
+  const component = this.subject();
+
+  const parentOption = { foo: 'parent' };
+  const childOption = { foo: 'child', parentOption };
+
+  component.send('registerRelationthip', childOption, parentOption);
   assert.equal(component.get('relationships.length'), 1,
     'expected to register relationship');
 });
@@ -56,7 +64,6 @@ test('unregisterOption', function(assert) {
 
   assert.deepEqual(component.get('options')[0], option,
     'expected option to be registred');
-
   assert.deepEqual(component.get('selected')[0], option,
     'expected option to be selected');
 
@@ -64,7 +71,6 @@ test('unregisterOption', function(assert) {
 
   assert.deepEqual(component.get('options')[0], undefined,
     'expected option to be unregistred');
-
   assert.equal(component.get('selected.length'), 0,
     'expected option not to be selected');
 });
@@ -175,3 +181,17 @@ test('isSelected', function(assert) {
   assert.equal(component.isSelected({ foo:'bar' }), false,
     'expected to return false if item is not selected');
 });
+
+test('getOptions', function(assert){
+  const component = this.subject();
+
+  const parentOption = { id: 1, name: 'foo' };
+  const optionA = { id: 1, name: 'foo' };
+  const optionB = { id: 1, name: 'foo' };
+
+  component.send('registerOption', optionA, parentOption);
+  component.send('registerOption', optionB, parentOption);
+
+  assert.equal(component.getOptions(parentOption).length, 3,
+    'expected to return option and its children');
+})

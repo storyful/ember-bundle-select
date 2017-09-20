@@ -1,10 +1,7 @@
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
-import sinon from 'sinon';
 // import Ember from 'ember';
-// const { run } = Ember;
+import { moduleForComponent, test } from 'ember-qunit';
+import sinon from 'sinon';
+import BundleObject from '../../helpers/bundle-object';
 
 moduleForComponent('bundle-select-option', 'Unit | Component | bundle select option', { unit: true });
 
@@ -16,16 +13,9 @@ test('didReceiveAttrs', function(assert) {
 test('didInsertElement', function(assert) {
   const option = { foo: 'bar' };
 
-  const bundle = {
-    selected: [],
-    options: [],
-    isEmpty: true,
-    toggleAction: () => {},
-    registerOptionAction: sinon.spy(),
-    unregisterOptionAction: () => {},
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  };
+  const bundle = BundleObject.create({
+    registerOptionAction: sinon.spy()
+  });
 
   const component = this.subject({
     option: option,
@@ -44,16 +34,9 @@ test('didInsertElement', function(assert) {
 test('didDestroyElement', function(assert) {
   const option = { foo: 'bar' };
 
-  const bundle = {
-    selected: [],
-    options: [],
-    isEmpty: true,
-    toggleAction: () => {},
-    registerOptionAction: () => {},
-    unregisterOptionAction: sinon.spy(),
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  };
+  const bundle = BundleObject.create({
+    unregisterOptionAction: sinon.spy()
+  });
 
   const component = this.subject({
     option: option,
@@ -72,16 +55,9 @@ test('didDestroyElement', function(assert) {
 test('toggle', function(assert) {
   const option = { foo: 'bar' };
 
-  const bundle = {
-    selected: [],
-    options: [],
-    isEmpty: true,
+  const bundle = BundleObject.create({
     toggleAction: sinon.spy(),
-    registerOptionAction: () => {},
-    unregisterOptionAction: () => {},
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  };
+  });
 
   const component = this.subject({
     option: option,
@@ -96,16 +72,7 @@ test('toggle', function(assert) {
 test('isSelected', function(assert) {
   const option = { foo: 'bar' };
 
-  const bundle = {
-    selected: [],
-    options: [],
-    isEmpty: true,
-    toggleAction: () => {},
-    registerOptionAction: () => {},
-    unregisterOptionAction: () => {},
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  };
+  const bundle = BundleObject.create();
 
   const component = this.subject({
     option: option,

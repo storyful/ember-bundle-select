@@ -21,7 +21,11 @@ export default Ember.Component.extend({
   actions: {
     registerOption(option, parent){
       get(this, 'options').pushObject( option );
-      if(parent) get(this, 'relationships').pushObject( { parent, child: option } );
+      (parent) && this.send('registerRelationthip', option, parent);
+    },
+
+    registerRelationthip(option, parent){
+      get(this, 'relationships').pushObject( { option, parent } )
     },
 
     unregisterOption(option){
@@ -48,6 +52,7 @@ export default Ember.Component.extend({
 
     toggle(option){
       const options = this.getOptions(option);
+
       return this.isSelected(option)  ?
              this.send('deselectOptions', options) :
              this.send('selectOptions', options);
@@ -63,7 +68,8 @@ export default Ember.Component.extend({
   getOptions(option) {
     const children = get(this, 'relationships')
       .filter((relationship) => option.toString() == relationship.parent.toString())
-      .map((relationship) => relationship.child);
+      .map((relationship) => relationship.option);
+
     return [option, ...children];
   },
 
