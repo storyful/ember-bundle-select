@@ -64,7 +64,6 @@ test('unregisterOption', function(assert) {
 
   assert.deepEqual(component.get('options')[0], option,
     'expected option to be registred');
-
   assert.deepEqual(component.get('selected')[0], option,
     'expected option to be selected');
 
@@ -72,7 +71,6 @@ test('unregisterOption', function(assert) {
 
   assert.deepEqual(component.get('options')[0], undefined,
     'expected option to be unregistred');
-
   assert.equal(component.get('selected.length'), 0,
     'expected option not to be selected');
 });
