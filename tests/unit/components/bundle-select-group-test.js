@@ -175,3 +175,17 @@ test('isSelected', function(assert) {
   assert.equal(component.isSelected({ foo:'bar' }), false,
     'expected to return false if item is not selected');
 });
+
+test('getOptions', function(assert){
+  const component = this.subject();
+
+  const parentOption = { id: 1, name: 'foo' };
+  const optionA = { id: 1, name: 'foo' };
+  const optionB = { id: 1, name: 'foo' };
+
+  component.send('registerOption', optionA, parentOption);
+  component.send('registerOption', optionB, parentOption);
+
+  assert.equal(component.getOptions(parentOption).length, 3,
+    'expected to return option and its children');
+})

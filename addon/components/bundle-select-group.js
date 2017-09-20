@@ -47,6 +47,7 @@ export default Ember.Component.extend({
 
     toggle(option){
       const options = this.getOptions(option);
+
       return this.isSelected(option)  ?
              this.send('deselectOptions', options) :
              this.send('selectOptions', options);
@@ -63,6 +64,7 @@ export default Ember.Component.extend({
     const children = get(this, 'relationships')
       .filter((relationship) => option.toString() == relationship.parent.toString())
       .map((relationship) => relationship.child);
+
     return [option, ...children];
   }
 

@@ -1,26 +1,15 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
+import BundleObject from '../../helpers/bundle-object';
 
 moduleForComponent('bundle-select-option', 'Integration | Component | bundle select option', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.set('bundle', {
-    selected: [],
-    options: [],
-    isEmpty: true,
-    toggleAction: () => {},
-    registerOptionAction: () => {},
-    unregisterOptionAction: () => {},
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  });
+  this.set('bundle', BundleObject.create());
 
   this.set('option', {});
 
@@ -34,23 +23,10 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text');
 });
 
-
-
 test('it handles toggleAction', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-  let toggleAction = sinon.spy();
-
-  this.set('bundle', {
-    selected: [],
-    options: [],
-    isEmpty: true,
-    toggleAction,
-    registerOptionAction: () => {},
-    unregisterOptionAction: () => {},
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  });
+  this.set('bundle', BundleObject.create({
+    toggleAction: sinon.spy()
+  }));
 
   this.set('option', {});
 
@@ -63,26 +39,15 @@ test('it handles toggleAction', function(assert) {
 
   Ember.run(() => document.querySelector('[data-test-toggle]').click());
 
-  assert.ok(toggleAction.calledOnce);
+  assert.ok(this.get('bundle.toggleAction').calledOnce);
 });
 
 test('it handles unregisterOptionAction', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-  const unregisterOptionAction = sinon.spy();
-
   const option = { foo: 'bar' };
 
-  this.set('bundle', {
-    selected: [],
-    options: [],
-    isEmpty: false,
-    toggleAction: () => {},
-    registerOptionAction: () => {},
-    unregisterOptionAction,
-    selectAllAction: () => {},
-    selectNoneAction: () => {}
-  });
+  this.set('bundle', BundleObject.create({
+    unregisterOptionAction: sinon.spy()
+  }));
 
   this.set('option', option);
   this.set('visible', true);
@@ -96,6 +61,21 @@ test('it handles unregisterOptionAction', function(assert) {
 
   this.set('visible', false);
 
-  assert.ok(unregisterOptionAction.calledOnce);
+  assert.ok(this.get('bundle.unregisterOptionAction').calledOnce);
 });
 
+skip('it handles parent option', function(assert) {
+  const parentOption = { foo: 'parent', parent: null  };
+  const childOption = { foo: 'child', parent: parentOption };
+
+  this.set('bundle', BundleObject.create());
+  this.set('option', childOption);
+  this.set('parent', parentOption);
+
+  // Template block usage:
+  this.render(hbs`
+    {{bundle-select-option bundle=bundle option=option parent=parent}}
+  `);
+
+  assert.ok(true);
+});
