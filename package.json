@@ -1,7 +1,7 @@
 {
   "name": "ember-bundle-select",
   "version": "0.3.0",
-  "description": "Bundle select primitives",
+  "description": "Bundle select primitives for Ember",
   "keywords": [
     "ember-addon"
   ],
