@@ -39,10 +39,12 @@ export default Ember.Controller.extend({
 
   actions: {
     levelUp(group){
-      return group.forEach(option => option.incrementProperty('level'))
+      return group.forEach( option => option.incrementProperty('level') );
     },
     create(){
       const newModel = this.get('newModel');
+      if(!this.get('newModel.level')) this.set('newModel.level', 1);
+
       this.get('models').pushObject( copy(newModel) );
       setProperties(newModel, { name: null, level: null });
     },
