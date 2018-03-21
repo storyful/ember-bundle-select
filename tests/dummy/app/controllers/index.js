@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { A, copy, setProperties } = Ember;
+const { A } = Ember;
 
 export default Ember.Controller.extend({
 
@@ -39,12 +39,15 @@ export default Ember.Controller.extend({
 
   actions: {
     levelUp(group){
-      return group.forEach(option => option.incrementProperty('level'))
+      return group.forEach( option => option.incrementProperty('level') );
     },
     create(){
-      const newModel = this.get('newModel');
-      this.get('models').pushObject( copy(newModel) );
-      setProperties(newModel, { name: null, level: null });
+      const newModel = Ember.Object.create(this.get('newModel'));
+
+      this.get('models').pushObject( newModel );
+
+      this.set('newModel.name', null);
+      this.set('newModel.level', null);
     },
     toggleHiddenOptions(){
       this.toggleProperty('showHiddenOptions');

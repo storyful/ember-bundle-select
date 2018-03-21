@@ -76,7 +76,6 @@ ember install https://github.com/storyful/ember-bundle-select.git
 * `git clone <repository-url>` this repository
 * `cd ember-bundle-select`
 * `npm install`
-* `bower install`
 
 ### Running
 
