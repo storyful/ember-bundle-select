@@ -31,11 +31,15 @@ export default Ember.Component.extend({
     },
 
     selectOptions(options){
-      get(this, 'selected').pushObjects( options );
+      if(get(this, 'selected')) {
+        get(this, 'selected').pushObjects( options );
+      }
     },
 
     deselectOptions(options){
-      get(this, 'selected').removeObjects( options );
+      if(get(this, 'selected')) {
+        get(this, 'selected').removeObjects( options );
+      }
     },
 
     selectAll(){
