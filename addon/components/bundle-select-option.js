@@ -28,8 +28,9 @@ export default Component.extend({
     get(this, 'bundle.registerOptionAction')( get(this, 'option'), get(this, 'parentOption') );
   },
 
-  didDestroyElement(){
+  willDestroyElement(){
     get(this, 'bundle.unregisterOptionAction')( get(this, 'option') )
+    this._super(...arguments);
   },
 
   actions: {
