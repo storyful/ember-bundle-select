@@ -34,7 +34,7 @@ module('Unit | Component | bundle select option', function(hooks) {
       'it should call bundle.registerOptionAction with option');
   });
 
-  test('didDestroyElement', function(assert) {
+  test('willDestroyElement', function(assert) {
     const option = { foo: 'bar' };
 
     const bundle = BundleObject.create({
@@ -46,7 +46,7 @@ module('Unit | Component | bundle select option', function(hooks) {
       bundle: bundle
     });
 
-    component.didDestroyElement();
+    component.willDestroyElement();
 
     assert.ok(bundle.unregisterOptionAction.called,
       'it should call bundle.unregisterOptionAction');
