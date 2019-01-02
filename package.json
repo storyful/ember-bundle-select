@@ -1,6 +1,6 @@
 {
   "name": "ember-bundle-select",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Bundle select primitives for Ember",
   "keywords": [
     "ember-addon"
@@ -40,7 +40,6 @@
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-cli-update": "^0.14.0",
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
