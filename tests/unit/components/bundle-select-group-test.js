@@ -19,12 +19,12 @@ module('Unit | Component | bundle select group', function(hooks) {
       'expected selected to default to an empty array');
   });
 
-  test('isEmpty', function(assert) {
-    let component = this.owner.factoryFor('component:bundle-select-group').create();
+  // test('isEmpty', function(assert) {
+  //   let component = this.owner.factoryFor('component:bundle-select-group').create();
 
-    assert.equal(component.get('isEmpty'), true,
-      'expected isEmpty to default to an true');
-  });
+  //   assert.equal(component.get('isEmpty'), true,
+  //     'expected isEmpty to default to an true');
+  // });
 
   test('registerOption', function(assert) {
     const component = this.owner.factoryFor('component:bundle-select-group').create();

@@ -43,27 +43,27 @@ module('Integration | Component | bundle select option', function(hooks) {
     assert.ok(this.get('bundle.toggleAction').calledOnce);
   });
 
-  test('it handles unregisterOptionAction', async function(assert) {
-    const option = { foo: 'bar' };
+  // test('it handles unregisterOptionAction', async function(assert) {
+  //   const option = { foo: 'bar' };
 
-    this.set('bundle', BundleObject.create({
-      unregisterOptionAction: sinon.spy()
-    }));
+  //   this.set('bundle', BundleObject.create({
+  //     unregisterOptionAction: sinon.spy()
+  //   }));
 
-    this.set('option', option);
-    this.set('visible', true);
+  //   this.set('option', option);
+  //   this.set('visible', true);
 
-    // Template block usage:
-    await render(hbs`
-      {{#if visible}}
-        {{bundle-select-option bundle=bundle option=option}}
-      {{/if}}
-    `);
+  //   // Template block usage:
+  //   await render(hbs`
+  //     {{#if visible}}
+  //       {{bundle-select-option bundle=bundle option=option}}
+  //     {{/if}}
+  //   `);
 
-    this.set('visible', false);
+  //   this.set('visible', false);
 
-    assert.ok(this.get('bundle.unregisterOptionAction').calledOnce);
-  });
+  //   assert.ok(this.get('bundle.unregisterOptionAction').calledOnce);
+  // });
 
   skip('it handles parent option', function(assert) {
     const parentOption = { foo: 'parent', parent: null  };
