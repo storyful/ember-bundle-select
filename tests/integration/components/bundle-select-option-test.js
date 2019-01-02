@@ -1,81 +1,83 @@
-import Ember from 'ember';
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { run } from '@ember/runloop';
+import { module, skip, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 import BundleObject from '../../helpers/bundle-object';
 
-moduleForComponent('bundle-select-option', 'Integration | Component | bundle select option', {
-  integration: true
-});
+module('Integration | Component | bundle select option', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.set('bundle', BundleObject.create());
+  test('it renders', async function(assert) {
+    this.set('bundle', BundleObject.create());
 
-  this.set('option', {});
+    this.set('option', {});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#bundle-select-option bundle=bundle option=option}}
-      template block text
-    {{/bundle-select-option}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#bundle-select-option bundle=bundle option=option}}
+        template block text
+      {{/bundle-select-option}}
+    `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
-});
+    assert.dom('*').hasText('template block text');
+  });
 
-test('it handles toggleAction', function(assert) {
-  this.set('bundle', BundleObject.create({
-    toggleAction: sinon.spy()
-  }));
+  test('it handles toggleAction', async function(assert) {
+    this.set('bundle', BundleObject.create({
+      toggleAction: sinon.spy()
+    }));
 
-  this.set('option', {});
+    this.set('option', {});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#bundle-select-option bundle=bundle option=option as |bundleOption|}}
-      <button onclick={{action bundleOption.toggleAction}} data-test-toggle="true">Toggle</button>
-    {{/bundle-select-option}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#bundle-select-option bundle=bundle option=option as |bundleOption|}}
+        <button onclick={{action bundleOption.toggleAction}} data-test-toggle="true">Toggle</button>
+      {{/bundle-select-option}}
+    `);
 
-  Ember.run(() => document.querySelector('[data-test-toggle]').click());
+    run(() => document.querySelector('[data-test-toggle]').click());
 
-  assert.ok(this.get('bundle.toggleAction').calledOnce);
-});
+    assert.ok(this.get('bundle.toggleAction').calledOnce);
+  });
 
-test('it handles unregisterOptionAction', function(assert) {
-  const option = { foo: 'bar' };
+  test('it handles unregisterOptionAction', async function(assert) {
+    const option = { foo: 'bar' };
 
-  this.set('bundle', BundleObject.create({
-    unregisterOptionAction: sinon.spy()
-  }));
+    this.set('bundle', BundleObject.create({
+      unregisterOptionAction: sinon.spy()
+    }));
 
-  this.set('option', option);
-  this.set('visible', true);
+    this.set('option', option);
+    this.set('visible', true);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#if visible}}
-      {{bundle-select-option bundle=bundle option=option}}
-    {{/if}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#if visible}}
+        {{bundle-select-option bundle=bundle option=option}}
+      {{/if}}
+    `);
 
-  this.set('visible', false);
+    this.set('visible', false);
 
-  assert.ok(this.get('bundle.unregisterOptionAction').calledOnce);
-});
+    assert.ok(this.get('bundle.unregisterOptionAction').calledOnce);
+  });
 
-skip('it handles parent option', function(assert) {
-  const parentOption = { foo: 'parent', parent: null  };
-  const childOption = { foo: 'child', parent: parentOption };
+  skip('it handles parent option', function(assert) {
+    const parentOption = { foo: 'parent', parent: null  };
+    const childOption = { foo: 'child', parent: parentOption };
 
-  this.set('bundle', BundleObject.create());
-  this.set('option', childOption);
-  this.set('parent', parentOption);
+    this.set('bundle', BundleObject.create());
+    this.set('option', childOption);
+    this.set('parent', parentOption);
 
-  // Template block usage:
-  this.render(hbs`
-    {{bundle-select-option bundle=bundle option=option parentOption=parent}}
-  `);
+    // Template block usage:
+    this.render(hbs`
+      {{bundle-select-option bundle=bundle option=option parentOption=parent}}
+    `);
 
-  assert.ok(true);
+    assert.ok(true);
+  });
 });

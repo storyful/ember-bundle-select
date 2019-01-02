@@ -1,85 +1,88 @@
+import { module, test } from 'qunit';
 // import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { setupTest } from 'ember-qunit';
 import sinon from 'sinon';
 import BundleObject from '../../helpers/bundle-object';
 
-moduleForComponent('bundle-select-option', 'Unit | Component | bundle select option', { unit: true });
+module('Unit | Component | bundle select option', function(hooks) {
+  setupTest(hooks);
 
-test('didReceiveAttrs', function(assert) {
-  assert.throws(() => this.subject(),
-    'it should throw an error is option and bundle are not provided')
-});
-
-test('didInsertElement', function(assert) {
-  const option = { foo: 'bar' };
-
-  const bundle = BundleObject.create({
-    registerOptionAction: sinon.spy()
+  test('didReceiveAttrs', function(assert) {
+    assert.throws(() => this.owner.factoryFor('component:bundle-select-option').create(),
+      'it should throw an error is option and bundle are not provided')
   });
 
-  const component = this.subject({
-    option: option,
-    bundle: bundle
+  test('didInsertElement', function(assert) {
+    const option = { foo: 'bar' };
+
+    const bundle = BundleObject.create({
+      registerOptionAction: sinon.spy()
+    });
+
+    const component = this.owner.factoryFor('component:bundle-select-option').create({
+      option: option,
+      bundle: bundle
+    });
+
+    component.didInsertElement();
+
+    assert.ok(bundle.registerOptionAction.called,
+      'it should call bundle.registerOptionAction');
+
+    assert.ok(bundle.registerOptionAction.calledWith(option),
+      'it should call bundle.registerOptionAction with option');
   });
 
-  component.didInsertElement();
+  test('didDestroyElement', function(assert) {
+    const option = { foo: 'bar' };
 
-  assert.ok(bundle.registerOptionAction.called,
-    'it should call bundle.registerOptionAction');
+    const bundle = BundleObject.create({
+      unregisterOptionAction: sinon.spy()
+    });
 
-  assert.ok(bundle.registerOptionAction.calledWith(option),
-    'it should call bundle.registerOptionAction with option');
-});
+    const component = this.owner.factoryFor('component:bundle-select-option').create({
+      option: option,
+      bundle: bundle
+    });
 
-test('didDestroyElement', function(assert) {
-  const option = { foo: 'bar' };
+    component.didDestroyElement();
 
-  const bundle = BundleObject.create({
-    unregisterOptionAction: sinon.spy()
+    assert.ok(bundle.unregisterOptionAction.called,
+      'it should call bundle.unregisterOptionAction');
+
+    assert.ok(bundle.unregisterOptionAction.calledWith(option),
+      'it should call bundle.unregisterOptionAction with option');
   });
 
-  const component = this.subject({
-    option: option,
-    bundle: bundle
+  test('toggle', function(assert) {
+    const option = { foo: 'bar' };
+
+    const bundle = BundleObject.create({
+      toggleAction: sinon.spy(),
+    });
+
+    const component = this.owner.factoryFor('component:bundle-select-option').create({
+      option: option,
+      bundle: bundle
+    });
+
+    component.send('toggle');
+
+    assert.ok(bundle.toggleAction.called);
   });
 
-  component.didDestroyElement();
+  test('isSelected', function(assert) {
+    const option = { foo: 'bar' };
 
-  assert.ok(bundle.unregisterOptionAction.called,
-    'it should call bundle.unregisterOptionAction');
+    const bundle = BundleObject.create();
 
-  assert.ok(bundle.unregisterOptionAction.calledWith(option),
-    'it should call bundle.unregisterOptionAction with option');
-});
+    const component = this.owner.factoryFor('component:bundle-select-option').create({
+      option: option,
+      bundle: bundle
+    });
 
-test('toggle', function(assert) {
-  const option = { foo: 'bar' };
+    component.set('option', option);
 
-  const bundle = BundleObject.create({
-    toggleAction: sinon.spy(),
+    assert.equal(component.get('isSelected'), false);
   });
-
-  const component = this.subject({
-    option: option,
-    bundle: bundle
-  });
-
-  component.send('toggle');
-
-  assert.ok(bundle.toggleAction.called);
-});
-
-test('isSelected', function(assert) {
-  const option = { foo: 'bar' };
-
-  const bundle = BundleObject.create();
-
-  const component = this.subject({
-    option: option,
-    bundle: bundle
-  });
-
-  component.set('option', option);
-
-  assert.equal(component.get('isSelected'), false);
 });

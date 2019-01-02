@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get, computed } from '@ember/object';
+import { assert } from '@ember/debug';
+import { isPresent } from '@ember/utils';
 import layout from '../templates/components/bundle-select-option';
-
-const { computed, get, assert, isPresent } = Ember;
 
 const NS = 'bundle-select-option';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   layout,
 
