@@ -4,10 +4,10 @@ import { A } from '@ember/array';
 
 export default Controller.extend({
 
-  newModel: {
+  newModel: Object.freeze({
     name: null,
     value: null
-  },
+  }),
 
   models: A([
     EmberObject.create({ name: 'Avengers', level: 5, children: [

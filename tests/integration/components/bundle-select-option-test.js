@@ -1,7 +1,7 @@
 import { run } from '@ember/runloop';
 import { module, skip, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 import BundleObject from '../../helpers/bundle-object';

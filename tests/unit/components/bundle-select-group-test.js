@@ -8,7 +8,7 @@ module('Unit | Component | bundle select group', function(hooks) {
   test('options', function(assert) {
     let component = this.owner.factoryFor('component:bundle-select-group').create();
 
-    assert.deepEqual(component.get('options'), [],
+    assert.equal(component.get('options').length, 0,
       'expected options to default to an empty array');
   });
 
@@ -39,7 +39,7 @@ module('Unit | Component | bundle select group', function(hooks) {
   test('registerOption with parent', function(assert) {
     const component = this.owner.factoryFor('component:bundle-select-group').create();
     const parentOption = { foo: 'bar' };
-    const option = { foo: 'bar', parentOption: option };
+    const option = { foo: 'bar', parentOption };
 
     component.send('registerOption', option, parentOption);
 

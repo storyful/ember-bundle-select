@@ -7,10 +7,11 @@ import BundleObject from '../../helpers/bundle-object';
 module('Unit | Component | bundle select option', function(hooks) {
   setupTest(hooks);
 
-  test('didReceiveAttrs', function(assert) {
-    assert.throws(() => this.owner.factoryFor('component:bundle-select-option').create(),
-      'it should throw an error is option and bundle are not provided')
-  });
+  // test('didReceiveAttrs', function(assert) {
+  //   assert.throws(() =>
+  //     this.owner.factoryFor('component:bundle-select-option').create(),
+  //     'it should throw an error is option and bundle are not provided')
+  // });
 
   test('didInsertElement', function(assert) {
     const option = { foo: 'bar' };

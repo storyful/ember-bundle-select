@@ -5,18 +5,34 @@
   </p>
 
   <p>
-    <button {{action "toggleHiddenOptions"}}
-      data-test-toggle-hidden-options="true">Toggle Hidden Options</button>
+    <button
+      data-test-toggle-hidden-options="true"
+      {{action "toggleHiddenOptions"}}
+    >
+      Toggle Hidden Options
+    </button>
 
-    <button {{action bundle.selectAllAction}}
-      data-test-select-all-action="true">All</button>
+    <button
+      data-test-select-all-action="true"
+      {{action bundle.selectAllAction}}
+    >
+      All
+    </button>
 
-    <button {{action bundle.selectNoneAction}}
-      data-test-select-none-action="true">None</button>
+    <button
+      data-test-select-none-action="true"
+      {{action bundle.selectNoneAction}}
+    >
+      None
+    </button>
 
-    <button {{action "levelUp" bundle.selected}}
+    <button
       disabled={{bundle.isEmpty}}
-      data-test-bundle-action="true"> Bundle Action: Level Up! (Bundle) </button>
+      data-test-bundle-action="true"
+      {{action "levelUp" bundle.selected}}
+    >
+      Bundle Action: Level Up! (Bundle)
+    </button>
   </p>
 
   <form>
