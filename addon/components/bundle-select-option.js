@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get, computed } from '@ember/object';
+import { assert } from '@ember/debug';
+import { isPresent } from '@ember/utils';
 import layout from '../templates/components/bundle-select-option';
-
-const { computed, get, assert, isPresent } = Ember;
 
 const NS = 'bundle-select-option';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   layout,
 
@@ -27,8 +28,9 @@ export default Ember.Component.extend({
     get(this, 'bundle.registerOptionAction')( get(this, 'option'), get(this, 'parentOption') );
   },
 
-  didDestroyElement(){
+  willDestroyElement(){
     get(this, 'bundle.unregisterOptionAction')( get(this, 'option') )
+    this._super(...arguments);
   },
 
   actions: {

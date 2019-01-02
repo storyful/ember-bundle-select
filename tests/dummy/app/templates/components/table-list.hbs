@@ -1,8 +1,10 @@
 {{#each models as |model index|}}
   <li class="is-selectable table-option">
     {{#bundle-select-option
-        option=model
-        bundle=bundle as |bundleOption|}}
+      option=model
+      bundle=bundle
+    as |bundleOption|
+    }}
 
       {{table-item model=model bundleOption=bundleOption index=index}}
     {{/bundle-select-option}}
@@ -11,11 +13,13 @@
       <ul class="table-child">
         {{#each model.children as |child index|}}
           {{#bundle-select-option
-              tagName="li"
-              classNames="is-selectable table-row"
-              option=child
-              parentOption=model
-              bundle=bundle as |bundleOption|}}
+            tagName="li"
+            classNames="is-selectable table-row"
+            option=child
+            parentOption=model
+            bundle=bundle
+          as |bundleOption|
+          }}
 
             {{table-item model=child bundleOption=bundleOption index=index}}
           {{/bundle-select-option}}

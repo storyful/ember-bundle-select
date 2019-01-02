@@ -1,13 +1,10 @@
-import Ember from 'ember';
+import { empty } from '@ember/object/computed';
+import Component from '@ember/component';
+import { get } from '@ember/object';
+import { A } from '@ember/array';
 import layout from '../templates/components/bundle-select-group';
 
-const {
-  computed,
-  get,
-  A
-} = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
 
   layout,
 
@@ -59,7 +56,7 @@ export default Ember.Component.extend({
     }
   },
 
-  isEmpty: computed.empty('selected'),
+  isEmpty: empty('selected'),
 
   isSelected(option){
     return this.get('selected').indexOf( option ) > -1;

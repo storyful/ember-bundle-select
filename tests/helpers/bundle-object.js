@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
-export default Ember.Object.extend({
-  selected: [],
-  options: [],
+export default EmberObject.extend({
+  selected: Object.freeze([]),
+  options: Object.freeze([]),
   isEmpty: true,
   toggleAction: () => {},
   registerOptionAction: () => {},
