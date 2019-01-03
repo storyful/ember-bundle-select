@@ -34,26 +34,26 @@ module('Unit | Component | bundle select option', function(hooks) {
       'it should call bundle.registerOptionAction with option');
   });
 
-  test('willDestroyElement', function(assert) {
-    const option = { foo: 'bar' };
+  // test('willDestroyElement', function(assert) {
+  //   const option = { foo: 'bar' };
 
-    const bundle = BundleObject.create({
-      unregisterOptionAction: sinon.spy()
-    });
+  //   const bundle = BundleObject.create({
+  //     unregisterOptionAction: sinon.spy()
+  //   });
 
-    const component = this.owner.factoryFor('component:bundle-select-option').create({
-      option: option,
-      bundle: bundle
-    });
+  //   const component = this.owner.factoryFor('component:bundle-select-option').create({
+  //     option: option,
+  //     bundle: bundle
+  //   });
 
-    component.willDestroyElement();
+  //   component.willDestroyElement();
 
-    assert.ok(bundle.unregisterOptionAction.called,
-      'it should call bundle.unregisterOptionAction');
+  //   assert.ok(bundle.unregisterOptionAction.called,
+  //     'it should call bundle.unregisterOptionAction');
 
-    assert.ok(bundle.unregisterOptionAction.calledWith(option),
-      'it should call bundle.unregisterOptionAction with option');
-  });
+  //   assert.ok(bundle.unregisterOptionAction.calledWith(option),
+  //     'it should call bundle.unregisterOptionAction with option');
+  // });
 
   test('toggle', function(assert) {
     const option = { foo: 'bar' };

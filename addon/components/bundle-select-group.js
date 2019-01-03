@@ -1,4 +1,3 @@
-import { empty } from '@ember/object/computed';
 import Component from '@ember/component';
 import { get } from '@ember/object';
 import { A } from '@ember/array';
@@ -55,8 +54,6 @@ export default Component.extend({
              this.send('selectOptions', options);
     }
   },
-
-  isEmpty: empty('selected'),
 
   isSelected(option){
     return this.get('selected').indexOf( option ) > -1;
