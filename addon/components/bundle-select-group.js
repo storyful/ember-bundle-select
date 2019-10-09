@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { get } from '@ember/object';
 import { A } from '@ember/array';
+import { copy } from 'ember-copy'
 import layout from '../templates/components/bundle-select-group';
 
 export default Component.extend({
@@ -39,11 +40,11 @@ export default Component.extend({
     },
 
     selectAll(){
-      this.set('selected', A(this.get('options').copy()) );
+      this.set('selected', copy(A(this.get('options')), true) );
     },
 
     selectNone(){
-      this.get('selected').clear();
+      this.set('selected', []);
     },
 
     toggle(option){
